@@ -2,16 +2,15 @@ package com.crimson.friendlycolors.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.crimson.friendlycolors.R;
 import com.crimson.friendlycolors.model.FriendlyData;
 import com.crimson.friendlycolors.model.Scheme;
-import com.parse.ParseObject;
 
 
 public class FriendlyActivity extends Activity {
@@ -53,16 +52,16 @@ public class FriendlyActivity extends Activity {
     private void loadScreen() {
 
         Scheme colorScheme = mFriendlyData.getColorScheme(bgColor);
-        int bgColorNum = colorScheme.getBgColorNum();
-        int textColorNum = colorScheme.getTextColor();
+        String bgHexColor = colorScheme.getBgHexColor();
+        String textHexColor = colorScheme.getTextHexColor();
 
         mTextView.setText(String.format(mFriendlyData.getRandomText(), mName));
-        mRL.setBackgroundColor(bgColorNum);
-        mTextView.setTextColor(textColorNum);
-        mButton1.setBackgroundColor(bgColorNum);
-        mButton2.setBackgroundColor(bgColorNum);
-        mButton1.setTextColor(textColorNum);
-        mButton2.setTextColor(textColorNum);
+        mRL.setBackgroundColor(Color.parseColor(bgHexColor));
+        mTextView.setTextColor(Color.parseColor(textHexColor));
+        mButton1.setBackgroundColor(Color.parseColor(bgHexColor));
+        mButton2.setBackgroundColor(Color.parseColor(bgHexColor));
+        mButton1.setTextColor(Color.parseColor(textHexColor));
+        mButton2.setTextColor(Color.parseColor(textHexColor));
 
         mButton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +76,6 @@ public class FriendlyActivity extends Activity {
                 finish();
             }
         });
-
     }
 
     private void again() {

@@ -31,14 +31,16 @@ public class FirstActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String color = mColorField.getText().toString();
-                if ((mNameField.getText().toString().length() == 0 ) || (color.length() == 0)){
-                    Toast.makeText(FirstActivity.this, "Please enter your name and one of the following colors to continue: red, blue, yellow, green, black, or white.", Toast.LENGTH_LONG).show();
+                String name = mNameField.getText().toString();
+                if ((name.length() == 0 ) || (color.length() == 0)){
+                    Toast.makeText(FirstActivity.this, "Please enter your name and one of the following colors to continue: red, blue, yellow, green, black, pink, mint or white.", Toast.LENGTH_LONG).show();
                 } else {
+                    name = name.substring(0, 1).toUpperCase() + name.substring(1);
                     int colorCheck = checkColor(color);
-                    if (colorCheck == -1) {
-                        Toast.makeText(FirstActivity.this, "That's not an available color, pick: red, blue, yellow, green, black, or white.", Toast.LENGTH_LONG).show();
+                    if (colorCheck == -7) {
+                        Toast.makeText(FirstActivity.this, "That's not an available color, pick: red, blue, yellow, green, black, pink, mint or white.", Toast.LENGTH_LONG).show();
                     } else {
-                        startStory(mNameField.getText().toString(), color);
+                        startStory(name, color);
                     }
                 }
             }
@@ -46,9 +48,9 @@ public class FirstActivity extends Activity {
     }
 
     private int checkColor(String color) {
-        String[] colors = {"red","blue","yellow","green","white","black"};
+        String[] colors = {"red", "blue", "yellow", "green", "white", "black", "mint", "pink"};
 
-        int check = -1;
+        int check = -7;
         for (int i = 0; i < colors.length; i++) {
             if (colors[i].equalsIgnoreCase(color)) {
                 check = 1;
